@@ -1,4 +1,4 @@
 # First Dungeon Crawler Game
- A basic clicker game made to be played on a website
+ A basic dungeon crawler game
  Nice
  
