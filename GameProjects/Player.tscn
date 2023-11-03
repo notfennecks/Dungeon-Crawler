@@ -1,0 +1,121 @@
+[gd_scene load_steps=12 format=3 uid="uid://disvi55jdnr7k"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_rgpg2"]
+[ext_resource type="SpriteFrames" uid="uid://h4m8lettapw2" path="res://SpriteFrames/Player.tres" id="2_5ea2m"]
+[ext_resource type="Texture2D" uid="uid://dfxm5jw1ymus2" path="res://Art/Pixel Crawler - FREE - 1.8/Weapons/Hands/Hands.png" id="4_s3f2b"]
+[ext_resource type="Script" path="res://States/StateMachine.gd" id="6_dmj6s"]
+[ext_resource type="Texture2D" uid="uid://bt15oi0pe2i21" path="res://Art/Pixel Crawler - FREE - 1.8/Weapons/Wood/Wood.png" id="6_hm3b1"]
+[ext_resource type="Script" path="res://States/PlayerIdle.gd" id="7_6rygv"]
+[ext_resource type="Script" path="res://States/PlayerRun.gd" id="8_mp6uf"]
+
+[sub_resource type="Animation" id="Animation_dkqum"]
+resource_name = "BareHandsIdle"
+length = 0.8
+loop_mode = 1
+step = 0.05
+
+[sub_resource type="Animation" id="Animation_yyymi"]
+resource_name = "BareHandsRun"
+length = 0.8
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-9, 6), Vector2(-10, 5), Vector2(-11, 6), Vector2(-10, 5), Vector2(-9, 6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightHand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(9, 6), Vector2(10, 5), Vector2(11, 6), Vector2(10, 5), Vector2(9, 6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u678d"]
+_data = {
+"BareHandsIdle": SubResource("Animation_dkqum"),
+"BareHandsRun": SubResource("Animation_yyymi")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nt0l8"]
+radius = 8.0
+height = 28.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_rgpg2")
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_5ea2m")
+animation = &"Idle"
+
+[node name="Hands" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hands"]
+libraries = {
+"": SubResource("AnimationLibrary_u678d")
+}
+
+[node name="LeftHand" type="Sprite2D" parent="Hands"]
+position = Vector2(-10, 8)
+texture = ExtResource("4_s3f2b")
+hframes = 2
+vframes = 4
+frame = 2
+region_rect = Rect2(12, 12, 19, 24)
+
+[node name="Weapon" type="Sprite2D" parent="Hands/LeftHand"]
+show_behind_parent = true
+position = Vector2(0, -13)
+texture = ExtResource("6_hm3b1")
+region_enabled = true
+region_rect = Rect2(3, 6, 10, 41)
+
+[node name="RightHand" type="Sprite2D" parent="Hands"]
+position = Vector2(9, 8)
+texture = ExtResource("4_s3f2b")
+hframes = 2
+vframes = 4
+frame = 3
+
+[node name="Weapon" type="Sprite2D" parent="Hands/RightHand"]
+position = Vector2(5, -5)
+texture = ExtResource("6_hm3b1")
+region_enabled = true
+region_rect = Rect2(119, 19, 17, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_nt0l8")
+debug_color = Color(0, 0.643137, 0.32549, 0.419608)
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_speed = 10.0
+rotation_smoothing_enabled = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_dmj6s")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("7_6rygv")
+player = NodePath("../..")
+
+[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("8_mp6uf")
+player = NodePath("../..")
