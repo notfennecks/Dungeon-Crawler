@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=22 format=3 uid="uid://dyih3bhxmx1ix"]
 
-[ext_resource type="Texture2D" uid="uid://b6hgd0r00oxso" path="res://Art/Pixel Crawler - FREE - 1.8/Enemy/Skeleton Crew/Skeleton - Base/Death/Death.png" id="1_7d6pp"]
-[ext_resource type="Texture2D" uid="uid://djtni76xvpkvy" path="res://Art/Pixel Crawler - FREE - 1.8/Enemy/Skeleton Crew/Skeleton - Base/Idle/Idle-Sheet.png" id="1_8vqks"]
-[ext_resource type="Texture2D" uid="uid://bnsnncaprm5cj" path="res://Art/Pixel Crawler - FREE - 1.8/Enemy/Skeleton Crew/Skeleton - Base/Run/Run.png" id="2_04jx1"]
+[ext_resource type="Texture2D" uid="uid://b6hgd0r00oxso" path="res://Art/Enemies/Skeleton/Skeleton - Base/Death/Death.png" id="1_7d6pp"]
+[ext_resource type="Texture2D" uid="uid://djtni76xvpkvy" path="res://Art/Enemies/Skeleton/Skeleton - Base/Idle/Idle-Sheet.png" id="1_8vqks"]
+[ext_resource type="Texture2D" uid="uid://bnsnncaprm5cj" path="res://Art/Enemies/Skeleton/Skeleton - Base/Run/Run.png" id="2_04jx1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r15u8"]
 atlas = ExtResource("1_7d6pp")

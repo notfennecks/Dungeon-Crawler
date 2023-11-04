@@ -1,13 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtv1v3fp63oim"]
+[gd_scene load_steps=3 format=3 uid="uid://dtv1v3fp63oim"]
 
-[ext_resource type="TileSet" uid="uid://3d3rduc2d4xa" path="res://GreenWoods.tres" id="1_ecpce"]
 [ext_resource type="PackedScene" uid="uid://disvi55jdnr7k" path="res://Player.tscn" id="2_ic0ll"]
 [ext_resource type="PackedScene" uid="uid://c62eqht5fdly0" path="res://Skeleton.tscn" id="3_u2b6c"]
 
 [node name="Test" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource("1_ecpce")
 collision_animatable = true
 format = 2
 layer_0/name = "Ground"

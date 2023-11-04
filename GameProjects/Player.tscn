@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://disvi55jdnr7k"]
+[gd_scene load_steps=11 format=3 uid="uid://disvi55jdnr7k"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_rgpg2"]
 [ext_resource type="SpriteFrames" uid="uid://h4m8lettapw2" path="res://SpriteFrames/Player.tres" id="2_5ea2m"]
-[ext_resource type="Texture2D" uid="uid://dfxm5jw1ymus2" path="res://Art/Pixel Crawler - FREE - 1.8/Weapons/Hands/Hands.png" id="4_s3f2b"]
+[ext_resource type="Texture2D" uid="uid://dfxm5jw1ymus2" path="res://Art/Weapons/Hands.png" id="4_s3f2b"]
 [ext_resource type="Script" path="res://States/StateMachine.gd" id="6_dmj6s"]
-[ext_resource type="Texture2D" uid="uid://bt15oi0pe2i21" path="res://Art/Pixel Crawler - FREE - 1.8/Weapons/Wood/Wood.png" id="6_hm3b1"]
 [ext_resource type="Script" path="res://States/PlayerIdle.gd" id="7_6rygv"]
 [ext_resource type="Script" path="res://States/PlayerRun.gd" id="8_mp6uf"]
 
@@ -78,25 +77,12 @@ vframes = 4
 frame = 2
 region_rect = Rect2(12, 12, 19, 24)
 
-[node name="Weapon" type="Sprite2D" parent="Hands/LeftHand"]
-show_behind_parent = true
-position = Vector2(0, -13)
-texture = ExtResource("6_hm3b1")
-region_enabled = true
-region_rect = Rect2(3, 6, 10, 41)
-
 [node name="RightHand" type="Sprite2D" parent="Hands"]
 position = Vector2(9, 8)
 texture = ExtResource("4_s3f2b")
 hframes = 2
 vframes = 4
 frame = 3
-
-[node name="Weapon" type="Sprite2D" parent="Hands/RightHand"]
-position = Vector2(5, -5)
-texture = ExtResource("6_hm3b1")
-region_enabled = true
-region_rect = Rect2(119, 19, 17, 24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
