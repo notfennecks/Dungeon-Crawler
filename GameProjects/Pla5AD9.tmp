@@ -1,12 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://disvi55jdnr7k"]
+[gd_scene load_steps=10 format=3 uid="uid://disvi55jdnr7k"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_rgpg2"]
-[ext_resource type="SpriteFrames" uid="uid://bcbagxsovorey" path="res://SpriteFrames/Rogue.tres" id="2_50848"]
 [ext_resource type="Texture2D" uid="uid://dfxm5jw1ymus2" path="res://Art/Weapons/Hands.png" id="4_s3f2b"]
-[ext_resource type="Script" path="res://States/Player/PlayerIdle.gd" id="5_jhnuk"]
 [ext_resource type="Script" path="res://States/StateMachine.gd" id="6_dmj6s"]
-[ext_resource type="Script" path="res://States/Player/PlayerRun.gd" id="6_vwmdi"]
-[ext_resource type="Script" path="res://States/Player/PlayerDeath.gd" id="7_s6ali"]
+[ext_resource type="Script" path="res://States/PlayerIdle.gd" id="7_6rygv"]
+[ext_resource type="Script" path="res://States/PlayerRun.gd" id="8_mp6uf"]
 
 [sub_resource type="Animation" id="Animation_dkqum"]
 resource_name = "BareHandsIdle"
@@ -55,17 +53,12 @@ radius = 8.0
 height = 28.0
 
 [node name="Player" type="CharacterBody2D"]
-z_index = 1
-y_sort_enabled = true
-collision_mask = 4
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_rgpg2")
-player_class = "Rogue"
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_50848")
-animation = &"Idle"
-autoplay = "Idle"
+animation = &"Death"
 
 [node name="Hands" type="Node2D" parent="."]
 
@@ -104,15 +97,9 @@ script = ExtResource("6_dmj6s")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("5_jhnuk")
+script = ExtResource("7_6rygv")
 player = NodePath("../..")
 
 [node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("6_vwmdi")
+script = ExtResource("8_mp6uf")
 player = NodePath("../..")
-
-[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("7_s6ali")
-player = NodePath("../..")
-
-[connection signal="animation_finished" from="BodySprite" to="StateMachine/Death" method="_on_body_sprite_animation_finished"]

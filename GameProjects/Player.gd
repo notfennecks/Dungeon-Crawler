@@ -1,22 +1,22 @@
-extends CharacterBody2D
+extends PlayerBase
 
-@export var speed = 400
+#var current_class = Global.current_class
 
-var input = Vector2.ZERO
+@export_enum("Rogue", "Knight", "Wizard") var player_class: String
 
-func _physics_process(delta):
-	player_movement(delta)
-	
-func player_movement(delta):
-	input = get_input()
-	
-	velocity = input * speed * delta * 20
-	velocity = velocity.limit_length(speed)
-	
-	move_and_slide()
+var knight_spriteframes = preload("res://SpriteFrames/Knight.tres")
+var rogue_spriteframes = preload("res://SpriteFrames/Rogue.tres")
+var wizard_spriteframes = preload("res://SpriteFrames/Wizard.tres")
 
-func get_input():
-	input.x = int(Input.is_action_pressed("Right")) - int(Input.is_action_pressed("Left"))
-	input.y = int(Input.is_action_pressed("Down")) - int(Input.is_action_pressed("Up"))
-	return input.normalized()
+func _ready():
+	#print(current_class)
+	#Change sprite frames based on the current class
+	match player_class:
+		"Knight":
+			$BodySprite.sprite_frames = knight_spriteframes
+		"Rogue":
+			$BodySprite.sprite_frames = rogue_spriteframes
+		"Wizard":
+			$BodySprite.sprite_frames = wizard_spriteframes
+			
 	

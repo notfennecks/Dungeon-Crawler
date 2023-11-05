@@ -13,6 +13,9 @@ func Update(delta: float):
 	
 	if player.velocity != Vector2.ZERO:
 		Transitioned.emit(self, "Run")
+		
+	if Input.is_action_just_pressed("Die"):
+		Transitioned.emit(self, "Death")
 	
 func Physics_Update(delta):
 	pass

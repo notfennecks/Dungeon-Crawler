@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3gh304w452ka"
-path="res://.godot/imported/Run-Sheet.png-a22ae9ae514b5785b3c34a0e905f5319.ctex"
+uid="uid://dn12t20cq3o8i"
+path="res://.godot/imported/Idle.png-7bd90f1a398d451fd65ae4394faaff5e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Heroes/Rogue/Run/Run-Sheet.png"
-dest_files=["res://.godot/imported/Run-Sheet.png-a22ae9ae514b5785b3c34a0e905f5319.ctex"]
+source_file="res://Art/Enemies/Skeleton/Skeleton - Base/Idle/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-7bd90f1a398d451fd65ae4394faaff5e.ctex"]
 
 [params]
 

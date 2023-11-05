@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfixvap7y6rf5"
-path="res://.godot/imported/Run-Sheet.png-bde818d018ef0f4d8c20b60d72c151a3.ctex"
+uid="uid://jpe4847rv5x6"
+path="res://.godot/imported/Run.png-604bca3bff1df299121e45ab061e917e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Heroes/Wizzard/Run/Run-Sheet.png"
-dest_files=["res://.godot/imported/Run-Sheet.png-bde818d018ef0f4d8c20b60d72c151a3.ctex"]
+source_file="res://Art/Heroes/Rogue/Run/Run.png"
+dest_files=["res://.godot/imported/Run.png-604bca3bff1df299121e45ab061e917e.ctex"]
 
 [params]
 
