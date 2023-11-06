@@ -18,6 +18,7 @@ func _physics_process(delta):
 		skeleton_movement(delta)
 		
 func skeleton_movement(delta):
+	make_path()
 	var dir = to_local(nav_agent.get_next_path_position()).normalized()
 	velocity = dir * speed
 	move_and_slide()
@@ -25,19 +26,19 @@ func skeleton_movement(delta):
 func make_path():
 	nav_agent.target_position = player.global_position
 	
-func _on_nav_path_update_timeout():
-	if player_chase:
-		make_path()
+func _on_attack_distance_body_entered(body):
+	player_chase = false
+	velocity = Vector2.ZERO
 	
-func _on_base_detection_area_body_entered(body):
+func _on_attack_distance_body_exited(body):
+	player_chase = true
+
+func _on_detection_area_body_entered(body):
 	if body.name == "Player":
 		player = body
 		player_chase = true
 		
-func _on_base_detection_area_body_exited(body):
-	velocity = Vector2.ZERO
-	player= null
+func _on_detection_area_body_exited(body):
+	player = null
 	player_chase = false
-
-
-
+	velocity = Vector2.ZERO

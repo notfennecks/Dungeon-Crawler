@@ -1,17 +1,61 @@
-[gd_scene load_steps=8 format=3 uid="uid://disvi55jdnr7k"]
+[gd_scene load_steps=12 format=3 uid="uid://disvi55jdnr7k"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_rgpg2"]
 [ext_resource type="SpriteFrames" uid="uid://bcbagxsovorey" path="res://SpriteFrames/Rogue.tres" id="2_50848"]
+[ext_resource type="Texture2D" uid="uid://dfxm5jw1ymus2" path="res://Art/Weapons/Hands.png" id="4_s3f2b"]
 [ext_resource type="Script" path="res://States/Player/PlayerIdle.gd" id="5_jhnuk"]
 [ext_resource type="Script" path="res://States/StateMachine.gd" id="6_dmj6s"]
 [ext_resource type="Script" path="res://States/Player/PlayerRun.gd" id="6_vwmdi"]
 [ext_resource type="Script" path="res://States/Player/PlayerDeath.gd" id="7_s6ali"]
+
+[sub_resource type="Animation" id="Animation_dkqum"]
+resource_name = "BareHandsIdle"
+length = 0.8
+loop_mode = 1
+step = 0.05
+
+[sub_resource type="Animation" id="Animation_yyymi"]
+resource_name = "BareHandsRun"
+length = 0.8
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-9, 6), Vector2(-10, 5), Vector2(-11, 6), Vector2(-10, 5), Vector2(-9, 6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightHand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(9, 6), Vector2(10, 5), Vector2(11, 6), Vector2(10, 5), Vector2(9, 6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u678d"]
+_data = {
+"BareHandsIdle": SubResource("Animation_dkqum"),
+"BareHandsRun": SubResource("Animation_yyymi")
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nt0l8"]
 radius = 8.0
 height = 28.0
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 y_sort_enabled = true
 collision_mask = 4
 motion_mode = 1
@@ -22,6 +66,28 @@ player_class = "Rogue"
 sprite_frames = ExtResource("2_50848")
 animation = &"Idle"
 autoplay = "Idle"
+
+[node name="Hands" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hands"]
+libraries = {
+"": SubResource("AnimationLibrary_u678d")
+}
+
+[node name="LeftHand" type="Sprite2D" parent="Hands"]
+position = Vector2(-10, 8)
+texture = ExtResource("4_s3f2b")
+hframes = 2
+vframes = 4
+frame = 2
+region_rect = Rect2(12, 12, 19, 24)
+
+[node name="RightHand" type="Sprite2D" parent="Hands"]
+position = Vector2(9, 8)
+texture = ExtResource("4_s3f2b")
+hframes = 2
+vframes = 4
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

@@ -6,7 +6,7 @@ var skeletonSprite : AnimatedSprite2D
 
 func Enter():
 	skeletonSprite = skeleton.get_node("BodySprite")
-	#print("Skeleton entering Idle state")
+	print("Skeleton entering Idle state")
 	
 func Update(delta: float):
 	skeletonSprite.play("Idle")

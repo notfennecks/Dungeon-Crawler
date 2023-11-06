@@ -6,7 +6,7 @@ var skeletonSprite : AnimatedSprite2D
 
 func Enter():
 	skeletonSprite = skeleton.get_node("BodySprite")
-	#print("Skeleton entering Run state")
+	print("Skeleton entering Run state")
 	
 func Update(delta: float):
 	skeletonSprite.play("Run")
@@ -25,3 +25,6 @@ func Physics_Update(delta):
 func Exit():
 	pass
 	#print("Leaving Run state")
+
+func _on_skeleton_ready_to_attack():
+	Transitioned.emit(self, "SkeletonAttack")

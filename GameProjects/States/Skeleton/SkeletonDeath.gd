@@ -7,7 +7,7 @@ var skeletonSprite : AnimatedSprite2D
 func Enter():
 	skeletonSprite = skeleton.get_node("BodySprite")
 	skeletonSprite.play("Death")
-	#print("Skeleton entering Death state")
+	print("Skeleton entering Death state")
 
 func Exit():
 	pass

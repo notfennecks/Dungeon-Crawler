@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://80475086wkr6"
-path="res://.godot/imported/Idle-Sheet.png-51e5993b2b1b851418948f14111366e9.ctex"
+uid="uid://cn7adw35ewvhd"
+path="res://.godot/imported/Death.png-923c04f7df12f1eb058de896c725bfcf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Heroes/Rogue/Idle/Idle-Sheet.png"
-dest_files=["res://.godot/imported/Idle-Sheet.png-51e5993b2b1b851418948f14111366e9.ctex"]
+source_file="res://Art/Heroes/Rogue/Death/Death.png"
+dest_files=["res://.godot/imported/Death.png-923c04f7df12f1eb058de896c725bfcf.ctex"]
 
 [params]
 

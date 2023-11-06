@@ -6,28 +6,27 @@
 [ext_resource type="Script" path="res://States/Skeleton/SkeletonIdle.gd" id="4_4sov2"]
 [ext_resource type="Script" path="res://States/Skeleton/SkeletonRun.gd" id="5_ful8f"]
 [ext_resource type="Script" path="res://States/Skeleton/SkeletonDeath.gd" id="6_fi0gb"]
-[ext_resource type="Script" path="res://States/Skeleton/SkeletonAttack.gd" id="7_csu6o"]
+[ext_resource type="Script" path="res://SkeletonAttack.gd" id="7_kfhod"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_07g27"]
 radius = 13.0
 height = 34.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k4pv0"]
-radius = 16.0
-height = 56.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_yrpc6"]
+radius = 31.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wesm4"]
 radius = 151.003
 
 [node name="Skeleton" type="CharacterBody2D"]
+z_index = 1
 y_sort_enabled = true
 collision_layer = 2
-collision_mask = 6
+collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_vhdta")
 skeleton_type = "Base"
-speed = 80
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_aft6w")
@@ -40,18 +39,20 @@ shape = SubResource("CapsuleShape2D_07g27")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
+[node name="NavPathUpdate" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
 [node name="AttackDistance" type="Area2D" parent="."]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDistance"]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_k4pv0")
+shape = SubResource("CircleShape2D_yrpc6")
 
-[node name="DetectionArea" type="Area2D" parent="."]
+[node name="BaseDetectionArea" type="Area2D" parent="."]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseDetectionArea"]
 shape = SubResource("CircleShape2D_wesm4")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -71,11 +72,13 @@ script = ExtResource("6_fi0gb")
 skeleton = NodePath("../..")
 
 [node name="SkeletonAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("skeleton")]
-script = ExtResource("7_csu6o")
+script = ExtResource("7_kfhod")
 skeleton = NodePath("../..")
 
+[connection signal="ReadyToAttack" from="." to="StateMachine/SkeletonRun" method="_on_skeleton_ready_to_attack"]
 [connection signal="animation_finished" from="BodySprite" to="StateMachine/SkeletonAttack" method="_on_body_sprite_animation_finished"]
+[connection signal="timeout" from="NavPathUpdate" to="." method="_on_nav_path_update_timeout"]
 [connection signal="body_entered" from="AttackDistance" to="." method="_on_attack_distance_body_entered"]
 [connection signal="body_exited" from="AttackDistance" to="." method="_on_attack_distance_body_exited"]
-[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
-[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="BaseDetectionArea" to="." method="_on_base_detection_area_body_entered"]
+[connection signal="body_exited" from="BaseDetectionArea" to="." method="_on_base_detection_area_body_exited"]
